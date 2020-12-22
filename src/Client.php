@@ -97,8 +97,9 @@ class Client
         $method = $override ? 'PUT' : 'POST';
     
         $response = $this->request($method, "files/$path", [
-            'content'        => $contents,
-            'commit_message' => $commitMessage
+            'content'        => base64_encode($contents),
+            'commit_message' => $commitMessage,
+            'encoding'       => 'base64'
         ]);
         
         return $this->responseContents($response);
